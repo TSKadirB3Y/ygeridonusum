@@ -1,0 +1,82 @@
+/* Genel Sayfa Stilleri */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Tablo Stil */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* İşlem Butonları */
+a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.ban-btn {
+    background-color: #f44336;
+}
+
+.unban-btn {
+    background-color: #4CAF50;
+}
+
+.ban-btn:hover {
+    background-color: #e53935;
+}
+
+.unban-btn:hover {
+    background-color: #388e3c;
+}
+
+/* Pop-up Mesaj Stili */
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
