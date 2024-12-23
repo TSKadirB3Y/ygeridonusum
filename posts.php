@@ -244,30 +244,6 @@ z-index: 1000;
     </style>
 </head>
 <body>
-    <!-- Arama Formu -->
-    <div class="search-container">
-        <form action="posts.php" method="POST">
-            <input type="text" name="search_user" placeholder="Kullanıcı ara..." required>
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-
-    <!-- Arama Sonuçları Gösterme -->
-    <?php if (!empty($users)): ?>
-        <div class="container">
-            <h2>Arama Sonuçları:</h2>
-            <ul>
-                <?php foreach ($users as $user): ?>
-                    <li>
-                        <a href="profile.php?id=<?php echo $user['id']; ?>">
-                            <img src="profilep/<?php echo $user['profile_picture'] ?: 'default-profile.jpg'; ?>" alt="Profile Picture" class="profile-picture">
-                            <?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
 
     <div class="container">
         <h1>Posts</h1>
