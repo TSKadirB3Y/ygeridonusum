@@ -9,6 +9,17 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'db.php';
 
+$page_name = 'posts';
+$sql = "SELECT * FROM page_meta WHERE page_name = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$page_name]);
+$page_meta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Eğer meta verileri varsa, sayfa başlığını ve meta açıklamasını kullan
+$title = $page_meta['title'] ?? 'Varsayılan Başlık';
+$description = $page_meta['description'] ?? 'Varsayılan açıklama';
+$keywords = $page_meta['keywords'] ?? 'Varsayılan, Anahtar, Kelimeler';
+
 // Kullanıcı arama
 $search_query = $_POST['search_user'] ?? '';
 $users = [];
@@ -108,6 +119,8 @@ function has_user_liked($post_id, $user_id) {
     $stmt->execute([$post_id, $user_id]);
     return $stmt->rowCount() > 0;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +128,9 @@ function has_user_liked($post_id, $user_id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <meta name="description" content="<?= htmlspecialchars($description) ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($keywords) ?>">
+    <title><?= htmlspecialchars($title) ?></title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>

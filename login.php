@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['role'] = $user['role'];  // Kullanıcı rolünü al
                 
                 // Yönlendirme
-                header("Location: index.php");
+                header("Location: posts.php");
                 exit();
             } else {
                 $error_message = "Geçersiz giriş bilgileri!";
@@ -39,6 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_message = "Geçersiz giriş bilgileri!";
     }
 }
+
+$page_name = 'login';
+$sql = "SELECT * FROM page_meta WHERE page_name = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$page_name]);
+$page_meta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Eğer meta verileri varsa, sayfa başlığını ve meta açıklamasını kullan
+$title = $page_meta['title'] ?? 'Varsayılan Başlık';
+$description = $page_meta['description'] ?? 'Varsayılan açıklama';
+$keywords = $page_meta['keywords'] ?? 'Varsayılan, Anahtar, Kelimeler';
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giriş Yap</title>
+    <meta name="description" content="<?= htmlspecialchars($description) ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($keywords) ?>">
+    <title><?= htmlspecialchars($title) ?></title>
     <style>
         body {
             display: flex;
@@ -121,4 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 </body>
-</html>
+</html><!-- Meta Tagları -->
+<meta name='title' content='Giriş Yap'>
+<meta name='description' content='Giriş Yap'>
+<meta name='keywords' content='Giriş Yap'>

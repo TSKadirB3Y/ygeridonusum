@@ -87,6 +87,17 @@ if (isset($_POST['change_password'])) {
         $error_message = "Mevcut şifreniz yanlış!";
     }
 }
+
+$page_name = 'profile';
+$sql = "SELECT * FROM page_meta WHERE page_name = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$page_name]);
+$page_meta = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Eğer meta verileri varsa, sayfa başlığını ve meta açıklamasını kullan
+$title = $page_meta['title'] ?? 'Varsayılan Başlık';
+$description = $page_meta['description'] ?? 'Varsayılan açıklama';
+$keywords = $page_meta['keywords'] ?? 'Varsayılan, Anahtar, Kelimeler';
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +105,9 @@ if (isset($_POST['change_password'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <meta name="description" content="<?= htmlspecialchars($description) ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($keywords) ?>">
+    <title><?= htmlspecialchars($title) ?></title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
@@ -144,6 +157,20 @@ if (isset($_POST['change_password'])) {
             background-color: #0056b3;
         }
 
+        .log-out button {
+            padding: 10px 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .log-out button:hover {
+            background-color: red;
+        }
         .message {
             padding: 10px;
             margin-bottom: 20px;
@@ -280,17 +307,31 @@ z-index: 1000;
                 </div>
             </form>
         </div>
+        <!--Çıkış Yap-->
+        <form action="logout.php" method="POST">
+            <div class="log-out">
+                <button type="submit" name="show_password_form">Çıkış Yap</button>
+            </div>
+        </form>
     </div>
 
     <!-- Sabit Menü -->
     <nav class="bottom-nav">
-        <ul>
-            <li><a href="posts.php"><i class="fas fa-home"></i></a></li>
-            <li><a href="posts.php"><i class="fa-solid fa-compass"></i></a></li>
-            <li><a href="profile.php"><i class="fa-solid fa-gear"></i></a></li>
-            <li><a href="messages.php"><i class="fa-solid fa-comment"></i></a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a href="posts.php"><i class="fas fa-home"></i></a></li>
+        <li><a href="posts.php"><i class="fa-solid fa-compass"></i></a></li>
+        <li><a href="profile.php"><i class="fa-solid fa-gear"></i></a></li>
+        <li><a href="messages.php"><i class="fa-solid fa-comment"></i></a></li>
+        
+        <!-- Admin veya Batman rolü için yeni buton -->
+        <?php if (in_array($user['role'], ['admin', 'batman'])): ?>
+            <li><a href="view_meta.php"><i class="fa-solid fa-cogs"></i></a></li>
+        <?php endif; ?>
+    </ul>
+</nav>
 
 </body>
-</html>
+</html><!-- Meta Tagları -->
+<meta name='title' content='Profilim'>
+<meta name='description' content='Profilim'>
+<meta name='keywords' content='Profilim'>

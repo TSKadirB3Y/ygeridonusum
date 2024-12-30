@@ -104,7 +104,7 @@ if (isset($_SESSION['user_id'])) {
 
         <!-- Eğer kullanıcı admin veya batman rolündeyse, admin sayfası butonu gösterilsin -->
         <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'batman')): ?>
-            <p><a href="admin.php"><button>Admin Sayfası</button></a></p>
+            <p><a href="metaadmin.php"><button>Admin Sayfası</button></a></p>
         <?php endif; ?>
     </div>
 </body>
