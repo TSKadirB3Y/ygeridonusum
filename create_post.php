@@ -229,6 +229,7 @@ z-index: 1000;
         <ul>
             <li><a href="posts.php"><i class="fas fa-home"></i></a></li>
             <li><a href="posts.php"><i class="fa-solid fa-compass"></i></a></li>
+            <li><a href="create_post.php"><i class="fa-solid fa-square-plus"></i></a></li>
             <li><a href="profile.php"><i class="fa-solid fa-gear"></i></a></li>
             <li><a href="messages.php"><i class="fa-solid fa-comment"></i><span></a></li>
         </ul>

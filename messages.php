@@ -81,6 +81,7 @@ if ($chat_user_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesajlaşma</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -218,6 +219,41 @@ if ($chat_user_id) {
                 font-size: 14px;
             }
         }
+
+        /* Sabit Menü CSS */
+        .bottom-nav {
+            position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+background: linear-gradient(90deg, #0066cc, #003d99);
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+padding: 15px 0;
+border-top-left-radius: 15px;
+border-top-right-radius: 15px;
+box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+z-index: 1000;
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav ul li {
+            margin: 0 15px;
+        }
+
+        .bottom-nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -274,6 +310,16 @@ if ($chat_user_id) {
             <p>Mesajlaşmak için bir kullanıcı seçin veya ara.</p>
         <?php endif; ?>
     </div>
+
+    <nav class="bottom-nav">
+        <ul>
+            <li><a href="posts.php"><i class="fas fa-home"></i></a></li>
+            <li><a href="posts.php"><i class="fa-solid fa-compass"></i></a></li>
+            <li><a href="create_post.php"><i class="fa-solid fa-square-plus"></i></a></li>
+            <li><a href="profile.php"><i class="fa-solid fa-gear"></i></a></li>
+            <li><a href="messages.php"><i class="fa-solid fa-comment"></i></a></li>
+        </ul>
+    </nav>
 
     <script>
         $(document).ready(function() {
